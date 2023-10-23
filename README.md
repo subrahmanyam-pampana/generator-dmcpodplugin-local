@@ -1,5 +1,4 @@
-# generator-dmcpodplugin-local [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> 
+# generator-dmcpodplugin-local
 By Using this yomen generator you can create SAP DMC POD Plugins easy and can also run locally
 
 ## Installation
