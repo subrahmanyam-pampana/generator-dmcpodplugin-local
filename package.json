@@ -1,6 +1,6 @@
 {
   "name": "generator-dmcpodplugin-local",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This generator scaffolds a SAP Digital Manufacturing Cloud POD Plugin",
   "homepage": "",
   "author": {
@@ -14,7 +14,7 @@
   "main": "generators/index.js",
   "keywords": [
     "",
-    "yeoman-generator"
+    "yeoman-generator-local"
   ],
   "devDependencies": {
     "chai": "^4.3.10",
