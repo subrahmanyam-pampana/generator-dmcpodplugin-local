@@ -1,13 +1,13 @@
-# generator-dmcpodplugin [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# generator-dmcpodplugin-local [![NPM version][npm-image]][npm-url]
 > 
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-dmcpodplugin using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman](http://yeoman.io) and generator-dmcpodplugin-local using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
-npm install -g generator-dmcpodplugin
+npm install -g generator-dmcpodplugin-local
 ```
 
 Then generate your new project:
@@ -27,12 +27,3 @@ yo dmcpodplugin
 
 Apache-2.0 © []()
 
-
-[npm-image]: https://badge.fury.io/js/generator-dmcpodplugin.svg
-[npm-url]: https://npmjs.org/package/generator-dmcpodplugin
-[travis-image]: https://travis-ci.com//generator-dmcpodplugin.svg?branch=master
-[travis-url]: https://travis-ci.com//generator-dmcpodplugin
-[daviddm-image]: https://david-dm.org//generator-dmcpodplugin.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org//generator-dmcpodplugin
-[coveralls-image]: https://coveralls.io/repos//generator-dmcpodplugin/badge.svg
-[coveralls-url]: https://coveralls.io/r//generator-dmcpodplugin
