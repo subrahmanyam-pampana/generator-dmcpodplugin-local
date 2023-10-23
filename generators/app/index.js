@@ -40,6 +40,52 @@ module.exports = class extends Generator {
         default: "company.custom.plugins"
       },
       {
+        type: "input",
+        name: "cfUrl",
+        message: "What is your clound foundary end point?",
+        default: "https://api.cf.eu20.hana.ondemand.com/"
+      },
+      {
+        type: "input",
+        name: "meServiceUrl",
+        message: "What is your manufacturing-execution-integration url?",
+        default: "https://dm-prod-az-quality-dme-integration-ms.cfapps.eu20.hana.ondemand.com"
+      },
+      {
+        type: "input",
+        name: "publicApiEndPoint",
+        message: "What is your public-api-endpoint url?",
+        default: "https://api.test.eu20.dmc.cloud.sap"
+      },
+      {
+        type: "input",
+        name: "oauthUrl",
+        message: "What is your authorization token url?",
+        default: "https://<yout domain>.authentication.eu20.hana.ondemand.com"
+      },
+      {
+        type: "input",
+        name: "clientid",
+        message: "What is your client id?"    
+      },
+      {
+        type: "input",
+        name: "clientSecret",
+        message: "What is your client secret?"    
+      },
+      {
+        type: "input",
+        name: "userMailid",
+        message: "What is your mail id to login?",
+        default: "myName@company.com"
+      },
+      {
+        type: "input",
+        name: "port",
+        message: "Enter the localhost port",
+        default: 8080
+      },
+      {
         type: "confirm",
         name: "workcenter",
         message: "Support WORK_CENTER PODS?",
@@ -97,12 +143,6 @@ module.exports = class extends Generator {
       {xsappname: this.props.pluginName}
     );
     
-  /*  this.fs.copyTpl(
-      this.templatePath('package.json'),
-      this.destinationPath('package.json'),
-      {name: this.props.pluginName}
-    );*/
-
     this.fs.copyTpl(
       this.templatePath('mta.yaml'),
       this.destinationPath('mta.yaml'),
@@ -118,14 +158,29 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('template/package.json'),
       this.destinationPath(this.props.pluginName+'/package.json'),
+      {name: this.props.pluginName, cfUrl:this.props.cfUrl}
+    );
+
+    //writing server files
+    this.fs.copyTpl(
+      this.templatePath('server/server.js'),
+      this.destinationPath(this.props.pluginName+'/server/server.js'),
       {name: this.props.pluginName}
     );
 
-    /*this.fs.copyTpl(
-      this.templatePath('template/package-lock.json'),
-      this.destinationPath(this.props.pluginName+'/package-lock.json'),
-      {name: this.props.pluginName}
-    );*/
+    let meServiceUrl = this.props.meServiceUrl.replace('integration','#service#')
+    this.fs.copyTpl(
+      this.templatePath('server/configs.json'),
+      this.destinationPath(this.props.pluginName+'/server/configs.json'),
+      { port: this.props.port,
+        meServiceUrl:meServiceUrl,
+        publicApiEndPoint:this.props.publicApiEndPoint,
+        oauthUrl:this.props.oauthUrl,
+        clientId:this.props.clientId,
+        clientSecret:this.props.clientSecret
+      }
+    );
+
 
     this.fs.copyTpl(
       this.templatePath('template/webapp/index.html'),
@@ -150,7 +205,9 @@ module.exports = class extends Generator {
       this.templatePath('template/webapp/designer/components.json'),
       this.destinationPath(this.props.pluginName+'/webapp/designer/components.json'),
       {name: this.props.pluginName, namespace: this.props.namespace, podTypes: strPodTypes}
-    );
+    )
+
+    this.fs.copy(this.templatePath('template/webapp/lib'), this.destinationPath(this.props.pluginName+'/webapp/lib'));
 
     this.fs.copyTpl(
       this.templatePath('template/webapp/template/serviceBinding.js'),
@@ -204,10 +261,33 @@ module.exports = class extends Generator {
     );
 
     this.fs.copyTpl(
+      this.templatePath('template/webapp/template/controller/BaseController.js'),
+      this.destinationPath(this.props.pluginName+'/webapp/'+this.props.pluginName+'/controller/BaseController.js'),
+      {name: this.props.pluginName, namespace: this.props.namespace}
+    );
+
+    this.fs.copyTpl(
       this.templatePath('template/webapp/template/builder/PropertyEditor.js'),
       this.destinationPath(this.props.pluginName+'/webapp/'+this.props.pluginName+'/builder/PropertyEditor.js'),
       {name: this.props.pluginName, namespace: this.props.namespace}
     );
+
+    this.fs.copyTpl(
+      this.templatePath('template/webapp/template/builder/localPodConfigs.json'),
+      this.destinationPath(this.props.pluginName+'/webapp/'+this.props.pluginName+'/builder/localPodConfigs.json'),
+      {name: this.props.pluginName}
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('template/webapp/template/data/localPodSelectionModelData.json'),
+      this.destinationPath(this.props.pluginName+'/webapp/'+this.props.pluginName+'/data/localPodSelectionModelData.json'),
+      {userMailid: this.props.userMailid}
+    );
+
+    this.fs.copy(this.templatePath('template/webapp/template/thirdPartyLib'), this.destinationPath(this.props.pluginName+'/webapp/'+this.props.pluginName+'/thirdPartyLib'));
+    this.fs.mkdir(this.destinationPath(this.props.pluginName+'/webapp/'+this.props.pluginName+'/Componets'));
+    this.fs.mkdir(this.destinationPath(this.props.pluginName+'/webapp/'+this.props.pluginName+'/customControls'));
+
   }
 
   install() {

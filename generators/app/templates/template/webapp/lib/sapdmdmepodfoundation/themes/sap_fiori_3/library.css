@@ -1,0 +1,24 @@
+@import "/resources/sap/ui/core/themes/base/global.css";
+/*!
+ * SAP UI development toolkit for HTML5 (SAPUI5)
+
+        (c) Copyright 2009-2016 SAP SE. All rights reserved
+    
+ */
+
+/*!
+ * SAP UI development toolkit for HTML5 (SAPUI5)
+
+        (c) Copyright 2009-2016 SAP SE. All rights reserved
+    
+ */
+
+.sapDmeConfigurableButton .sapMBtnInner.sapMBtnText .sapMBtnIcon:before {
+    width: auto
+}
+
+/* Inline theming parameters */
+
+#sap-ui-theme-sap\.dm\.dme\.podfoundation {
+    background-image: url('data:text/plain;utf-8,%7B%7D')
+}

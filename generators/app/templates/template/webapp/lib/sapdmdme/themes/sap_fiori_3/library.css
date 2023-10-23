@@ -1,0 +1,40 @@
+/*!
+ * SAP UI development toolkit for HTML5 (SAPUI5)
+
+        (c) Copyright 2009-2016 SAP SE. All rights reserved
+    
+ */
+
+/*!
+ * SAP UI development toolkit for HTML5 (SAPUI5)
+
+        (c) Copyright 2009-2016 SAP SE. All rights reserved
+    
+ */
+
+.dmeClock {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.dmeClockInner {
+    padding: 8px;
+    box-sizing: border-box
+}
+
+.dmeClockText {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold
+}
+
+/* Inline theming parameters */
+
+#sap-ui-theme-sap\.dm\.dme {
+    background-image: url('data:text/plain;utf-8,%7B%7D')
+}

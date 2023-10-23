@@ -7,7 +7,10 @@
 		<script id="sap-ui-bootstrap"
 			src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
 			data-sap-ui-theme="sap_fiori_3"
-			data-sap-ui-resourceroots='{"<%= namespace %>.<%= name %>": "./<%= name %>"}'
+			data-sap-ui-resourceroots='{"<%= namespace %>.<%= name %>": "./<%= name %>"
+										"sap.dm.dme":"./lib/sapdmdme",
+										"sap.dm.dme.podfoundation":"./lib/sapdmdmepodfoundation"
+									   }'
 			data-sap-ui-compatVersion="edge"
 			data-sap-ui-oninit="module:sap/ui/core/ComponentSupport"
 			data-sap-ui-async="true"
@@ -15,6 +18,6 @@
 		</script>
 	</head>
 	<body class="sapUiBody">
-		<div data-sap-ui-component data-name="<%= namespace %>.<%= name %>" data-id="container" data-settings='{"id" : "<%= name %>"}'></div>
+		<div data-sap-ui-component data-name="<%= namespace %>.<%= name %>.<%= name %>" data-id="container" data-settings='{"id" : "<%= name %>"}'></div>
 	</body>
 </html>

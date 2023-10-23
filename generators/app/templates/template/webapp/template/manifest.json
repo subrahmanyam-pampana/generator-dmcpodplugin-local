@@ -97,8 +97,20 @@
 		"resources": {
 			"css": [{
 				"uri": "css/style.css"
-			}]
+			}],
+			"js": [
+			  {
+				"uri": "thirdPartyLib/moment.min.js"
+			  },
+			  {
+				"uri": "thirdPartyLib/lodash.min.js"
+			  }
+			]
 		},
+		"resourceRoots": {
+			"custom.controls": "./customControls",
+			"Components":"./Components"
+		  },
 		"routing": {
 			"config": {
 				"routerClass": "sap.m.routing.Router",

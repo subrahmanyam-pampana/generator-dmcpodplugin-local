@@ -1,0 +1,57 @@
+/**
+ * Constants for values used across controller modules and tests.
+ */
+sap.ui.define(function() {
+    "use strict";
+
+    return {
+        RELATED_OBJECT_ID: "relatedObject",
+        RELATED_OBJECT_VERSION_ID: "relatedObjectVersion",
+        POD_EVENT_CHANNEL: "sap.mes.PodCommunicationChannel",
+        POD_MAIN_PAGE: "MainPage",
+        PLANT_DS_PATH: "/sap.app/dataSources/plant-oDataSource/uri",
+        PLANT_DS_REST_PATH: "/sap.app/dataSources/plant-RestSource/uri",
+        PRODUCT_DS_PATH: "/sap.app/dataSources/product-oDataSource/uri",
+        PRODUCT_DS_REST_PATH: "/sap.app/dataSources/product-RestSource/uri",
+        PRODUCTION_DS_PATH: "/sap.app/dataSources/production-oDataSource/uri",
+        PRODUCTION_DS_REST_PATH: "/sap.app/dataSources/production-RestSource/uri",
+        POD_FOUNDATION_DS_PATH: "/sap.app/dataSources/podFoundation-oDataSource/uri",
+        POD_FOUNDATION_DS_REST_PATH: "/sap.app/dataSources/podFoundation-RestSource/uri",
+        INVENTORY_DS_PATH: "/sap.app/dataSources/inventory-oDataSource/uri",
+        INVENTORY_DS_REST_PATH: "/sap.app/dataSources/inventory-RestSource/uri",
+        WI_DS_PATH: "/sap.app/dataSources/workinstruction-oDataSource/uri",
+        WI_DS_REST_PATH: "/sap.app/dataSources/workinstruction-RestSource/uri",
+        DC_DS_PATH: "/sap.app/dataSources/datacollection-oDataSource/uri",
+        DC_DS_REST_PATH: "/sap.app/dataSources/datacollection-RestSource/uri",
+        AC_DS_PATH: "/sap.app/dataSources/activityconfirmation-oDataSource/uri",
+        AC_DS_REST_PATH: "/sap.app/dataSources/activityconfirmation-RestSource/uri",
+        NON_CONFORMANCE_DS_PATH: "/sap.app/dataSources/nonconformance-oDataSource/uri",
+        NON_CONFORMANCE_DS_REST_PATH: "/sap.app/dataSources/nonconformance-RestSource/uri",
+        ASSEMBLY_DS_PATH: "/sap.app/dataSources/assembly-oDataSource/uri",
+        ASSEMBLY_DS_REST_PATH: "/sap.app/dataSources/assembly-RestSource/uri",
+        SERVICE_REGISTRY_DS_PATH: "/sap.app/dataSources/serviceregistry-oDataSource/uri",
+        SERVICE_REGISTRY_DS_REST_PATH: "/sap.app/dataSources/serviceregistry-RestSource/uri",
+        OEE_DS_PATH: "/sap.app/dataSources/OEE-oDataSource/uri",
+        OEE_DS_REST_PATH: "/sap.app/dataSources/OEE-RestSource/uri",
+        AIN_DS_REST_PATH: "/sap.app/dataSources/ain-RestSource/uri",
+        AIN_DS_PATH: "/sap.app/dataSources/ain-oDataSource/uri",
+        PACKING_DS_REST_PATH: "/sap.app/dataSources/packing-RestSource/uri",
+        PACKING_DS_ODATA_PATH: "/sap.app/dataSources/packing-oDataSource/uri",
+        NUMBERING_DS_REST_PATH: "/sap.app/dataSources/numbering-RestSource/uri",
+        CLASSIFICATION_DS_PATH: "/sap.app/dataSources/classification-RestSource/uri",
+        DEMAND_DS_PATH: "/sap.app/dataSources/demand-oDataSource/uri",
+        DEMAND_DS_REST_PATH: "/sap.app/dataSources/demand-RestSource/uri",
+        PE_DS_REST_PATH: "/sap.app/dataSources/pe-RestSource/uri",
+        QUALITY_INSPECTION_REST_PATH: "/sap.app/dataSources/qualityInspection-RestSource/uri",
+        QUALITY_INSPECTION_DS_PATH: "/sap.app/dataSources/qualityInspection-oDataSource/uri",
+        ALERT_DS_REST_PATH: "/sap.app/dataSources/alerts-RestSource/uri",
+        ALERT_DS_ODATA_PATH: "/sap.app/dataSources/alerts-oDataSource/uri",
+        TOOL_DS_REST_PATH: "/sap.app/dataSources/tool-RestSource/uri",
+        TOOL_DS_PATH: "/sap.app/dataSources/tool-oDataSource/uri",
+        LOGISTICS_DS_REST_PATH: "/sap.app/dataSources/logistics-RestSource/uri",
+        LOGISTICS_DS_PATH: "/sap.app/dataSources/logistics-oDataSource/uri",
+        IMAGE_OVERLAY_DS_PATH: "/sap.app/dataSources/imageOverlay-oDataSource/uri",
+        PUBLIC_API_HUB_REST_PATH: "/sap.app/dataSources/publicApiHub-RestSource/uri",
+        FM_DS_REST_PATH: "/sap.app/dataSources/fm-RestSource/uri"
+    };
+});

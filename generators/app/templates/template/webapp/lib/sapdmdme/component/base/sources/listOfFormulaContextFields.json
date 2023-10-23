@@ -1,0 +1,24 @@
+{ "BC":
+	[
+		{
+			"fieldName": "QTY"
+		},
+		{
+			"fieldName": "TOTAL_QTY"
+		},
+		{
+			"fieldName": "COMPONENT_SCRAP"
+		},
+		{
+			"fieldName": "TOLERANCE_UNDER"
+		},
+		{
+			"fieldName": "TOLERANCE_OVER"
+		}
+	],
+	"B":
+	[ {
+		"fieldName": "BASE_QTY"
+	}
+	]
+}

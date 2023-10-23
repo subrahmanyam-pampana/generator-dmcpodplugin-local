@@ -1,0 +1,98 @@
+/*
+* COMMON BASE STYLESHEET
+* The following styles are to be common inside every application directly or indirectly extending the BaseComponent.
+*/
+
+/*
+*  KEY FIELDS
+*/
+
+.mesUpperCaseTransform>.sapMInputBaseContentWrapper>.sapMInputBaseInner {
+    text-transform: uppercase;
+}
+
+.creationTimeRange {
+    min-width: 340px;
+}
+
+/*
+*  LIST MANIPULATOR
+*/
+
+.mes-movableRow__iconSeparator {
+    margin-right: 3px;
+}
+
+/*
+*  FILTER BAR
+*/
+
+.mes-filterBar_narrow .sapUiCompFilterBarToolbar {
+    overflow: visible;
+    flex-wrap: wrap;
+    height: auto;
+}
+
+.mes-filterBar_narrow .mes-filterBar__liveSearch {
+    margin-left: 0;
+}
+
+.sapUiContainer-Narrow .mes-filterBar_narrow .sapMBarChild.mes-filterBar__liveSearch,
+.sapUiContainer-Medium .mes-filterBar_narrow .sapMBarChild.mes-filterBar__liveSearch {
+    order: 10;
+    margin: 0;
+    width: 100%;
+    max-width: none;
+}
+
+.sapUiContainer-Narrow .mes-filterBar_narrow>div:last-child,
+.sapUiContainer-Medium .mes-filterBar_narrow>div:last-child,
+.sapUiContainer-Narrow .mes-filterBar__cont,
+.sapUiContainer-Medium .mes-filterBar__cont,
+.sapUiContainer-Narrow .mes-customFilter,
+.sapUiContainer-Medium .mes-customFilter {
+    width: 100%;
+}
+
+.mes-customFilter {
+    min-width: 340px;
+}
+
+/* making attachments bold and slightly larger size */
+
+td[id*="-attachmentsTable-"]>.sapMText {
+    font-size: 0.95rem;
+    font-weight: bold;
+}
+
+/* Dirty workaround for BCP 1880470938; todo: remove after moving to dynamicPage */
+
+.dmeMasterListPage .sapMPageHeader .sapMBarRight {
+    width: 48px !important;
+}
+
+.dmeMasterListPage .sapMPageHeader .sapMBarMiddle .sapMBarPH {
+    width: auto !important;
+    visibility: visible !important;
+}
+
+/* RelatedObject control styles */
+
+.dmeRelatedObjectForm.sapUiSimpleForm .sapUiFormResGrid>div {
+    padding: 0;
+}
+
+.dmeRelatedObjectForm.sapUiSimpleForm .sapUiFormResGridCont.sapUiRespGridMedia-Std-Phone>div.sapUiRespGridBreakS,
+.dmeRelatedObjectForm.sapUiSimpleForm .sapUiFormResGridCont>div:first-child {
+    padding-left: 0;
+}
+
+.dmeRelatedObjectForm.sapUiSimpleForm .sapUiFormResGridCont.sapUiRespGridMedia-Std-Phone>div.sapUiRespGridSpanS12,
+.dmeRelatedObjectForm.sapUiSimpleForm .sapUiFormResGridCont>div:last-child {
+    padding-right: 4px;
+}
+
+.fontSize {
+    font-size: 1rem !important;
+    font-weight: bold;
+}
