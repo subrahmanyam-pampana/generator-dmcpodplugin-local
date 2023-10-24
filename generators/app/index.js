@@ -181,7 +181,7 @@ module.exports = class extends Generator {
     );
 
     this.fs.copyTpl(
-      this.templatePath('.gitignore'),
+      this.templatePath('gitignore.txt'),
       this.destinationPath('.gitignore'),
       { ignoreConfigsFile: "/server/configs.json" }
     );
