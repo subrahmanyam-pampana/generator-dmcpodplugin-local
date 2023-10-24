@@ -1,0 +1,8 @@
+{
+    "port":"<%= port%>",
+    "manufacturing-execution-service":"<%= meServiceUrl %>",
+    "public-api-endpoint":"<%= publicApiEndPoint %>",
+    "auth-url":"<%= oauthUrl %>",
+    "clientId":"<%= clientid %>",
+    "clientSecret":"<%= clientSecret %>"
+}
