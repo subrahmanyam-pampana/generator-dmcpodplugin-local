@@ -21,18 +21,19 @@ sap.ui.define(
             localPodConfigs = configs;
             this.onAfterPodConfigsLoad(this._getConfiguration())
           })
-          
-          //only for local development
+        
           if(!this.getPodController()){
             let localPodSelDataUrl = sap.ui.require.toUrl('<%= namespacePath %>/<%= name %>/<%= name %>/data/localPodSelectionModelData.json')
             this.getJsonFile(localPodSelDataUrl)
             .then(data=>{
-              this.ownerComponent.setModel(new JSONModel(data), "zPodSelectionModel");
+              this.zPodSelectionModel = new JSONModel(data);
+              this.ownerComponent.setModel(this.zPodSelectionModel, "zPodSelectionModel");
+              this.onAfterPodSelectionModelLoad()
             })
-          }
-
-          this.zPodSelectionModel = this.ownerComponent.getModel("zPodSelectionModel");
-         
+          }else{
+            this.zPodSelectionModel = this.ownerComponent.getModel("zPodSelectionModel");
+            this.onAfterPodSelectionModelLoad()
+          }         
         },
         //called once pod configurations loaded
         onAfterPodConfigsLoad:function(configs){

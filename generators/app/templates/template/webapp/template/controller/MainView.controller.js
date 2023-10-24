@@ -12,16 +12,7 @@ sap.ui.define([
     }
     return BaseController.extend("<%= namespace %>.<%= name %>.<%= name %>.controller.MainView", {
         onInit: function () {
-            BaseController.prototype.onInit.apply(this, arguments);
-
-            //Example of calling public API
-            this.get(query.get_sfcDetails,{
-                plant: this.getPlant(),
-                sfc:""
-            }).then(res=>{
-                console.log(res)
-            })
-            
+            BaseController.prototype.onInit.apply(this, arguments);        
         },
         onBeforeRenderingPlugin: function () {
             
@@ -36,6 +27,15 @@ sap.ui.define([
             this.getView().byId("idBackButton").setVisible(podConfigs.backButtonVisible);
             this.getView().byId("closeButton").setVisible(podConfigs.closeButtonVisible);
             this.getView().byId("headerTitle").setText(podConfigs.title);
+        },
+        onAfterPodSelectionModelLoad:function(){
+            //Example of calling public API
+            this.get(query.get_sfcDetails,{
+                plant: this.getPlant(),
+                sfc:"enter sfc here"
+            }).then(res=>{
+                console.log(res)
+            })
         },
 
         isSubscribingToNotifications: function () {
