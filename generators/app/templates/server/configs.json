@@ -2,7 +2,7 @@
     "port":"<%= port%>",
     "manufacturing-execution-service":"<%= meServiceUrl %>",
     "public-api-endpoint":"<%= publicApiEndPoint %>",
-    "auth-url":"<%= oauthUrl %>",
+    "auth-url":"<%= oauthUrl %>/oauth/token",
     "clientId":"<%= clientid %>",
     "clientSecret":"<%= clientSecret %>"
 }

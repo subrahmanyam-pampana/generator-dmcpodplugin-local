@@ -7,7 +7,7 @@ const open = require('opn');
 
 const app = express();
 
-const configs =JSON.parse(fs.readFileSync('./configs.json'))
+const configs =JSON.parse(fs.readFileSync('server/configs.json'))
 const port = configs.port;
 const oDataservice = configs['manufacturing-execution-service']
 const targetServerUrl = configs['public-api-endpoint'];

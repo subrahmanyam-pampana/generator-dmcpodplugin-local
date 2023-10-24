@@ -62,7 +62,7 @@ module.exports = class extends Generator {
         type: "input",
         name: "oauthUrl",
         message: "What is your authorization token url?",
-        default: "https://<yout domain>.authentication.eu20.hana.ondemand.com"
+        default: "https://yourdomain.authentication.eu20.hana.ondemand.com"
       },
       {
         type: "input",
@@ -78,7 +78,7 @@ module.exports = class extends Generator {
         type: "input",
         name: "userMailid",
         message: "What is your mail id to login?",
-        default: "myName@company.com"
+        default: "yourName@company.com"
       },
       {
         type: "input",
@@ -138,6 +138,27 @@ module.exports = class extends Generator {
 
   writing() {
 
+    //writing server files
+    this.fs.copyTpl(
+      this.templatePath('server/server.js'),
+      this.destinationPath('server/server.js'),
+      { name: this.props.pluginName }
+    );
+
+    let meServiceUrl = this.props.meServiceUrl.replace('integration', '#service#')
+    this.fs.copyTpl(
+      this.templatePath('server/configs.json'),
+      this.destinationPath('server/configs.json'),
+      {
+        port: this.props.port,
+        meServiceUrl: meServiceUrl,
+        publicApiEndPoint: this.props.publicApiEndPoint,
+        oauthUrl: this.props.oauthUrl,
+        clientid: this.props.clientid,
+        clientSecret: this.props.clientSecret
+      }
+    );
+
     this.fs.copyTpl(
       this.templatePath('xs-security.json'),
       this.destinationPath('xs-security.json'),
@@ -151,6 +172,21 @@ module.exports = class extends Generator {
     );
 
     this.fs.copyTpl(
+      this.templatePath('package.json'),
+      this.destinationPath('package.json'),
+      { name: this.props.pluginName, 
+        cfUrl: this.props.cfUrl,
+        userMailid:this.props.userMailid
+       }
+    );
+
+    this.fs.copyTpl(
+      this.templatePath('.gitignore'),
+      this.destinationPath('.gitignore'),
+      { ignoreConfigsFile: "/server/configs.json" }
+    );
+
+    this.fs.copyTpl(
       this.templatePath('template/xs-app.json'),
       this.destinationPath(this.props.pluginName + '/xs-app.json'),
       { name: this.props.pluginName }
@@ -158,31 +194,9 @@ module.exports = class extends Generator {
 
     this.fs.copyTpl(
       this.templatePath('template/package.json'),
-      this.destinationPath(this.props.pluginName + '/package.json'),
-      { name: this.props.pluginName, cfUrl: this.props.cfUrl }
+      this.destinationPath(this.props.pluginName+'/package.json'),
+      { name: this.props.pluginName}
     );
-
-    //writing server files
-    this.fs.copyTpl(
-      this.templatePath('server/server.js'),
-      this.destinationPath(this.props.pluginName + '/server/server.js'),
-      { name: this.props.pluginName }
-    );
-
-    let meServiceUrl = this.props.meServiceUrl.replace('integration', '#service#')
-    this.fs.copyTpl(
-      this.templatePath('server/configs.json'),
-      this.destinationPath(this.props.pluginName + '/server/configs.json'),
-      {
-        port: this.props.port,
-        meServiceUrl: meServiceUrl,
-        publicApiEndPoint: this.props.publicApiEndPoint,
-        oauthUrl: this.props.oauthUrl,
-        clientid: this.props.clientid,
-        clientSecret: this.props.clientSecret
-      }
-    );
-
 
     this.fs.copyTpl(
       this.templatePath('template/webapp/index.html'),
@@ -262,13 +276,18 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('template/webapp/template/controller/MainView.controller.js'),
       this.destinationPath(this.props.pluginName + '/webapp/' + this.props.pluginName + '/controller/MainView.controller.js'),
-      { name: this.props.pluginName, namespace: this.props.namespace }
+      { name: this.props.pluginName, namespace: this.props.namespace,
+        namespacePath:this.props.namespace.replaceAll('.','/')
+       }
     );
 
     this.fs.copyTpl(
       this.templatePath('template/webapp/template/controller/BaseController.js'),
       this.destinationPath(this.props.pluginName + '/webapp/' + this.props.pluginName + '/controller/BaseController.js'),
-      { name: this.props.pluginName, namespace: this.props.namespace }
+      { name: this.props.pluginName, 
+        namespace: this.props.namespace,
+        namespacePath:this.props.namespace.replaceAll('.','/')
+       }
     );
 
     this.fs.copyTpl(
@@ -304,24 +323,7 @@ module.exports = class extends Generator {
   }
 
   install() {
-    const installDependencies = () => {
-      this.log('Installing project dependencies...');
-    
-      const npmInstall = childProcess.spawn('npm', ['install'], {
-        stdio: 'inherit',
-        cwd: this.destinationPath(),
-      });
-    
-      npmInstall.on('close', (code) => {
-        if (code === 0) {
-          this.log('Dependencies installed successfully.');
-        } else {
-          this.log.error('Failed to install dependencies.');
-        }
-      });
-    };
 
-    installDependencies()
   }
 
   end() {

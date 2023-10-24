@@ -1,38 +1,51 @@
 sap.ui.define([
-    'jquery.sap.global',
-    "<%= namespace %>/<%= name %>/<%= name %>/controller/BaseController",
-    "sap/ui/model/json/JSONModel"
-], function (jQuery, BaseController, JSONModel) {
+    "<%= namespacePath %>/<%= name %>/<%= name %>/controller/BaseController",
+    "sap/ui/model/json/JSONModel",
+	"sap/m/MessageToast"
+], function (BaseController,
+	JSONModel,
+	MessageToast) {
     "use strict";
-
+    let podConfigs={};
+    let query = {
+        get_sfcDetails:"sfc/v1/sfcdetail"
+    }
     return BaseController.extend("<%= namespace %>.<%= name %>.<%= name %>.controller.MainView", {
         onInit: function () {
             BaseController.prototype.onInit.apply(this, arguments);
+
+            //Example of calling public API
+            this.get(query.get_sfcDetails,{
+                plant: this.getPlant(),
+                sfc:""
+            }).then(res=>{
+                console.log(res)
+            })
+            
         },
-
-        onAfterRendering: function () {
-            this.getView().byId("backButton").setVisible(this.getConfiguration().backButtonVisible);
-            this.getView().byId("closeButton").setVisible(this.getConfiguration().closeButtonVisible);
-
-            this.getView().byId("headerTitle").setText(this.getConfiguration().title);
-            this.getView().byId("textPlugin").setText(this.getConfiguration().text);
-
-        },
-
         onBeforeRenderingPlugin: function () {
-
+            
         },
-        isSubscribingToNotifications: function () {
-            var bNotificationsEnabled = true;
+        onAfterRendering: function () { 
+            
+        },
+        onAfterPodConfigsLoad:function(configs){
+            podConfigs = configs;
+            console.log('onAfterPodConfigsLoad from mainview')
+            console.log(podConfigs)
+            this.getView().byId("idBackButton").setVisible(podConfigs.backButtonVisible);
+            this.getView().byId("closeButton").setVisible(podConfigs.closeButtonVisible);
+            this.getView().byId("headerTitle").setText(podConfigs.title);
+        },
 
+        isSubscribingToNotifications: function () {
+            var bNotificationsEnabled = false;
             return bNotificationsEnabled;
         },
-
 
         getCustomNotificationEvents: function (sTopic) {
             //return ["template"];
         },
-
 
         getNotificationMessageHandler: function (sTopic) {
 
@@ -43,7 +56,6 @@ sap.ui.define([
         },
 
         _handleNotificationMessage: function (oMsg) {
-
             var sMessage = "Message not found in payload 'message' property";
             if (oMsg && oMsg.parameters && oMsg.parameters.length > 0) {
                 for (var i = 0; i < oMsg.parameters.length; i++) {
@@ -53,12 +65,13 @@ sap.ui.define([
 
                             break;
                         case "template2":
-
-
                     }
                 }
             }
 
+        },
+        onBackButtonPress:function(oEvent){
+            MessageToast.show('Back Button Pressed!')
         },
 
         onExit: function () {

@@ -1,26 +1,31 @@
 sap.ui.define(
   ["sap/dm/dme/podfoundation/controller/PluginViewController",'sap/ui/model/json/JSONModel'],
-  function (PluginViewController,JSONModel) {
+   function (PluginViewController,JSONModel) {
     "use strict";
     let controller;
-    let localPodConfigs = {};
-    
+    let localPodConfigs = {}
+
     return PluginViewController.extend(
       "<%= namespace %>.<%= name %>.<%= name %>.controller.BaseController",
       {
-        onInit: function () {
+        onInit:function () {
           PluginViewController.prototype.onInit.apply(this, arguments);
           controller = this;
           this.ownerComponent = this._getPodController().getOwnerComponent();
           
           this.eventBus = this.ownerComponent.getEventBus();
-          this.getJsonFile(sap.ui.require.toUrl('<%= namespace %>/<%= name %>/<%= name %>/builder/localPodConfigs.json')).then(configs=>{
-            localPodConfigs = configs;
-          })
+          console.log(localPodConfigs)
 
+          this.getJsonFile(sap.ui.require.toUrl("<%= namespacePath %>/<%= name %>/<%= name %>/builder/localPodConfigs.json"))
+          .then(configs=>{
+            localPodConfigs = configs;
+            this.onAfterPodConfigsLoad(this._getConfiguration())
+          })
+          
           //only for local development
           if(!this.getPodController()){
-            this.getJsonFile('<%= namespace %>/<%= name %>/<%= name %>/data/localPodSelectionModelData.json')
+            let localPodSelDataUrl = sap.ui.require.toUrl('<%= namespacePath %>/<%= name %>/<%= name %>/data/localPodSelectionModelData.json')
+            this.getJsonFile(localPodSelDataUrl)
             .then(data=>{
               this.ownerComponent.setModel(new JSONModel(data), "zPodSelectionModel");
             })
@@ -28,6 +33,10 @@ sap.ui.define(
 
           this.zPodSelectionModel = this.ownerComponent.getModel("zPodSelectionModel");
          
+        },
+        //called once pod configurations loaded
+        onAfterPodConfigsLoad:function(configs){
+
         },
         setCSSFile: function (filePath) {
           $('head').append(`<link rel="stylesheet" href=${filePath}>`)
@@ -71,12 +80,7 @@ sap.ui.define(
         getResource: function () {
           return this.zPodSelectionModel.getProperty("/loginData/resource");
         },
-        closeDialog: function (oEvent) {
-          let dialog = oEvent.getSource()
-            while(dialog.getMetadata()._sClassName!=='sap.m.Dialog') dialog = dialog.getParent();
-            dialog.close();
-        },
-
+        
         get: function (api, params) {
           return new Promise((resolve, reject) => {
             if (this.getPodController()) {

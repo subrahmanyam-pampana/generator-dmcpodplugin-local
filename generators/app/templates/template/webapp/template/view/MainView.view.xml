@@ -1,37 +1,37 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="<%= namespace %>.<%= name %>.<%= name %>.controller.MainView" width="100%" height="100%">
-		
-        <Panel 
-                id="panelPlugin"  
-                width="100%"
-                height="100%"
-                expandable="false"
-                expanded="false"
-                accessibleRole="Region"
-                backgroundDesign="Transparent"
-                class="sapUiNoContentPadding">  
-        <headerToolbar>
-            <Toolbar height="3rem">
+<mvc:View 
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    controllerName="<%= namespace %>.<%= name %>.<%= name %>.controller.MainView"
+    busyIndicatorDelay="0"
+    height="100%">
+    <App>
+        <Page>
+            <headerContent>
                 <Button
-                    id="backButton"
+                    id="idBackButton"
                     visible="false"
                     text="{i18n>template.back.btn}"
                     tooltip="{i18n>template.back.tooltip}"
                     icon="sap-icon://nav-back"
-                    press="onBackPress"/>
-                <Title id="headerTitle" text=""/>
-                <ToolbarSpacer/>
+                    press="onBackButtonPress" />
+                <ToolbarSpacer />    
+                <Title id="headerTitle" text="SAP DMC POD Plugin" />
+                <ToolbarSpacer />
                 <Button
                     id="closeButton"
                     visible="false"
                     tooltip="{i18n>template.close.tooltip}"
                     icon="sap-icon://decline"
-                    press="onClosePress"/>
-            </Toolbar>
-        </headerToolbar>
-        <content> 
-            <Text id="textPlugin" text="template" class="textFontSize" textAlign="Center" width="100%"/>
-        </content>
-	    </Panel>		
-        
-  
+                    press="onClosePress" />
+            </headerContent>
+            <content>
+                <FlexBox justifyContent="Center" alignItems="Center" width="100%" height="100%">
+                    <Title text="DMC POD Plugin is Ready!!"/>
+                </FlexBox>
+              
+            </content>
+
+        </Page>
+
+    </App>
 </mvc:View>

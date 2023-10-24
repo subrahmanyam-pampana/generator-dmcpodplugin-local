@@ -1,7 +1,8 @@
 sap.ui.define([
 	"sap/dm/dme/podfoundation/component/production/ProductionUIComponent",
-	"sap/ui/Device"
-], function (ProductionUIComponent, Device) {
+	"sap/ui/Device",
+	"sap/ui/model/json/JSONModel"
+], function (ProductionUIComponent, Device,JSONModel) {
 	"use strict";
 
 	return ProductionUIComponent.extend("<%= namespace %>.<%= name %>.<%= name %>.Component", {
