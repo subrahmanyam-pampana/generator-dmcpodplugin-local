@@ -1,41 +1,41 @@
 sap.ui.define([
     "<%= namespacePath %>/<%= name %>/<%= name %>/controller/BaseController",
     "sap/ui/model/json/JSONModel",
-	"sap/m/MessageToast"
+    "sap/m/MessageToast"
 ], function (BaseController,
-	JSONModel,
-	MessageToast) {
+    JSONModel,
+    MessageToast) {
     "use strict";
-    let podConfigs={};
-    let query = {
-        get_sfcDetails:"sfc/v1/sfcdetail"
+    let podConfigs = {};
+    let apis = {
+        get_sfcDetails: "sfc/v1/sfcdetail"
     }
     return BaseController.extend("<%= namespace %>.<%= name %>.<%= name %>.controller.MainView", {
         onInit: function () {
-            BaseController.prototype.onInit.apply(this, arguments);        
-        },
-        onBeforeRenderingPlugin: function () {
-            
-        },
-        onAfterRendering: function () { 
-            
-        },
-        onAfterPodConfigsLoad:function(configs){
-            podConfigs = configs;
-            console.log('onAfterPodConfigsLoad from mainview')
-            console.log(podConfigs)
+            BaseController.prototype.onInit.apply(this, arguments);
+            podConfigs = this._getConfiguration()
             this.getView().byId("idBackButton").setVisible(podConfigs.backButtonVisible);
             this.getView().byId("closeButton").setVisible(podConfigs.closeButtonVisible);
             this.getView().byId("headerTitle").setText(podConfigs.title);
-        },
-        onAfterPodSelectionModelLoad:function(){
+
             //Example of calling public API
-            this.get(query.get_sfcDetails,{
-                plant: this.getPlant(),
-                sfc:"enter sfc here"
-            }).then(res=>{
-                console.log(res)
-            })
+            /*
+            this.get(apis.get_sfcDetails,{
+               plant: this.getPlant(),
+               sfc:"enter sfc here"
+           }).then(res=>{
+               console.log(res)
+           })
+           */
+        },
+        onBeforeRenderingPlugin: function () {
+
+        },
+        onAfterRendering: function () {
+
+        },
+        onAfterPodConfigsLoad: function (configs) {
+            
         },
 
         isSubscribingToNotifications: function () {
@@ -70,7 +70,7 @@ sap.ui.define([
             }
 
         },
-        onBackButtonPress:function(oEvent){
+        onBackButtonPress: function (oEvent) {
             MessageToast.show('Back Button Pressed!')
         },
 

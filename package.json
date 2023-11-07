@@ -1,6 +1,6 @@
 {
   "name": "generator-dmcpodplugin-local",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "This generator scaffolds a SAP Digital Manufacturing Cloud POD Plugin",
   "homepage": "",
   "author": {
@@ -75,7 +75,8 @@
   },
   "scripts": {
     "pretest": "eslint .",
-    "test": "jest"
+    "test": "jest",
+    "dev":"node generators/app/index.js"
   },
   "license": "Apache-2.0"
 }

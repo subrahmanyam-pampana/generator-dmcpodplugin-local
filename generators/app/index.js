@@ -9,7 +9,7 @@ module.exports = class extends Generator {
     // Have Yeoman greet the user.
     this.log(
       yosay(
-        `Welcome to the ${chalk.red('SAP Digital Manufacturing Cloud POD Plugin with local dev env V1.0.1')} generator!`
+        `Welcome to the ${chalk.red('SAP Digital Manufacturing Cloud POD Plugin with local dev env V1.0.8')} generator!`
       )
     );
 
@@ -299,14 +299,14 @@ module.exports = class extends Generator {
     );
 
     this.fs.copyTpl(
-      this.templatePath('template/webapp/template/builder/localPodConfigs.json'),
-      this.destinationPath(this.props.pluginName + '/webapp/' + this.props.pluginName + '/builder/localPodConfigs.json'),
+      this.templatePath('template/webapp/template/builder/localPodConfigs.js'),
+      this.destinationPath(this.props.pluginName + '/webapp/' + this.props.pluginName + '/builder/localPodConfigs.js'),
       { name: this.props.pluginName }
     );
 
     this.fs.copyTpl(
-      this.templatePath('template/webapp/template/data/localPodSelectionModelData.json'),
-      this.destinationPath(this.props.pluginName + '/webapp/' + this.props.pluginName + '/data/localPodSelectionModelData.json'),
+      this.templatePath('template/webapp/template/data/localPodSelectionModelData.js'),
+      this.destinationPath(this.props.pluginName + '/webapp/' + this.props.pluginName + '/data/localPodSelectionModelData.js'),
       { userMailid: this.props.userMailid }
     );
 

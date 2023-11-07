@@ -1,9 +1,13 @@
 sap.ui.define(
-  ["sap/dm/dme/podfoundation/controller/PluginViewController",'sap/ui/model/json/JSONModel'],
-   function (PluginViewController,JSONModel) {
+  ["sap/dm/dme/podfoundation/controller/PluginViewController",
+  'sap/ui/model/json/JSONModel',
+  "<%= namespacePath %>/<%= name %>/<%= name %>/builder/localPodConfigs",
+  "<%= namespacePath %>/<%= name %>/<%= name %>/data/localPodSelectionModelData"
+
+],
+   function (PluginViewController,JSONModel,localPodConfigs,localPodSelectionModelData) {
     "use strict";
     let controller;
-    let localPodConfigs = {}
 
     return PluginViewController.extend(
       "<%= namespace %>.<%= name %>.<%= name %>.controller.BaseController",
@@ -14,31 +18,19 @@ sap.ui.define(
           this.ownerComponent = this._getPodController().getOwnerComponent();
           
           this.eventBus = this.ownerComponent.getEventBus();
-          console.log(localPodConfigs)
-
-          this.getJsonFile(sap.ui.require.toUrl("<%= namespacePath %>/<%= name %>/<%= name %>/builder/localPodConfigs.json"))
-          .then(configs=>{
-            localPodConfigs = configs;
-            this.onAfterPodConfigsLoad(this._getConfiguration())
-          })
         
           if(!this.getPodController()){
-            let localPodSelDataUrl = sap.ui.require.toUrl('<%= namespacePath %>/<%= name %>/<%= name %>/data/localPodSelectionModelData.json')
-            this.getJsonFile(localPodSelDataUrl)
-            .then(data=>{
-              this.zPodSelectionModel = new JSONModel(data);
+           
+              this.zPodSelectionModel = new JSONModel(localPodSelectionModelData);
               this.ownerComponent.setModel(this.zPodSelectionModel, "zPodSelectionModel");
-              this.onAfterPodSelectionModelLoad()
-            })
+              
+          
           }else{
             this.zPodSelectionModel = this.ownerComponent.getModel("zPodSelectionModel");
-            this.onAfterPodSelectionModelLoad()
+           
           }         
         },
-        //called once pod configurations loaded
-        onAfterPodConfigsLoad:function(configs){
 
-        },
         setCSSFile: function (filePath) {
           $('head').append(`<link rel="stylesheet" href=${filePath}>`)
         },
