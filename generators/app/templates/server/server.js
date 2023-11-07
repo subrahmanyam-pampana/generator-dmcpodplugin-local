@@ -158,7 +158,7 @@ app.get("/oData/:servicePath*", (req, res) => {
   console.log(targetPath)
   let service = extractService(targetPath)
   let url = oDataservice.replace('#service#',service) + targetPath;
-  const host = oDataservice.replace('#service#',service)
+  const host = oDataservice.replace('#service#',service).replace('https://','')
 
  
   const serializedParams = querystring.stringify(req.query, {encode: false});
@@ -191,7 +191,7 @@ app.post("/oData/:servicePath*", (req, res) => {
   console.log(targetPath)
   let service = extractService(targetPath)
   const url = oDataservice.replace('#service#',service) + targetPath;
-  const host = oDataservice.replace('#service#',service)
+  const host = oDataservice.replace('#service#',service).replace('https://','')
 
   console.log(url, req.query);
   axios.post(url,req.body,{
