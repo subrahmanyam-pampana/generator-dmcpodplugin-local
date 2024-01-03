@@ -213,6 +213,7 @@ module.exports = class extends Generator {
     if (this.props.operation && this.props.order) { strPodTypes = strPodTypes + ","; }
 
     if (this.props.order) { strPodTypes = strPodTypes + "\"ORDER\""; }
+    if (this.props.order && this.props.custom) { strPodTypes = strPodTypes + ","; }
 
     if (this.props.custom) { strPodTypes = strPodTypes + "\"OTHER\""; }
 
