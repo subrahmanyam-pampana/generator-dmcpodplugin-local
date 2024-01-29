@@ -109,7 +109,8 @@
 		},
 		"resourceRoots": {
 			"custom.controls": "./customControls",
-			"Components":"./Components"
+			"Components":"./Components",
+			"node_modules":"./node_modules"
 		  },
 		"routing": {
 			"config": {

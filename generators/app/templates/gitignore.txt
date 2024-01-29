@@ -1,4 +1,4 @@
 /mta_archives/
 /node_modules/
 /resources/
-<%= ignoreConfigsFile %>
+/local-configs.json

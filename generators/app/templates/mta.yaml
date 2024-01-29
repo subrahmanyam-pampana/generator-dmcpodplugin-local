@@ -21,13 +21,11 @@ modules:
            \"exposeHeaders\": [\"Accept\",\"Authorization\",\"X-Requested-With\",\"X-Sap-Cid\",
            \"Access-Control-Allow-Origin\",\"Access-Control-Allow-Credentials\",\"X-Csrf-Token\",
            \"Content-Type\",\"x-dme-industry-type\",\"x-dme-plant\",\"x-features\"]}]"
-   #build-parameters:
-      #builder: grunt
    requires:
-    - name: uaa_indicator_suite
+    - name: uaa_<%= name %>
 
 resources:
- - name: uaa_indicator_suite
+ - name: uaa_<%= name %>
    parameters:
       path: ./xs-security.json
       service-plan: application

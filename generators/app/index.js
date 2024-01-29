@@ -9,7 +9,7 @@ module.exports = class extends Generator {
     // Have Yeoman greet the user.
     this.log(
       yosay(
-        `Welcome to the ${chalk.red('SAP Digital Manufacturing Cloud POD Plugin with local dev env V1.0.8')} generator!`
+        `Welcome to the ${chalk.red('SAP Digital Manufacturing Cloud POD Plugin with local dev env V1.0.10')} generator!`
       )
     );
 
@@ -38,7 +38,7 @@ module.exports = class extends Generator {
         type: "input",
         name: "namespace",
         message: "What is your plugin namespace?",
-        default: "company.custom.plugins"
+        default: "company.custom.plugin.<pluginName>"
       },
       {
         type: "input",
@@ -50,7 +50,7 @@ module.exports = class extends Generator {
         type: "input",
         name: "meServiceUrl",
         message: "What is your manufacturing-execution-integration url?",
-        default: "https://dm-prod-az-quality-dme-integration-ms.cfapps.eu20.hana.ondemand.com"
+        default: "https://yourDomain-dme-integration-ms.cfapps.eu20.hana.ondemand.com"
       },
       {
         type: "input",
@@ -131,24 +131,16 @@ module.exports = class extends Generator {
     ];
 
     return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
       this.props = props;
     });
   }
 
   writing() {
 
-    //writing server files
-    this.fs.copyTpl(
-      this.templatePath('server/server.js'),
-      this.destinationPath('server/server.js'),
-      { name: this.props.pluginName }
-    );
-
     let meServiceUrl = this.props.meServiceUrl.replace('integration', '#service#')
     this.fs.copyTpl(
-      this.templatePath('server/configs.json'),
-      this.destinationPath('server/configs.json'),
+      this.templatePath('local-configs.json'),
+      this.destinationPath('local-configs.json'),
       {
         port: this.props.port,
         meServiceUrl: meServiceUrl,
@@ -183,7 +175,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('gitignore.txt'),
       this.destinationPath('.gitignore'),
-      { ignoreConfigsFile: "/server/configs.json" }
+      {}
     );
 
     this.fs.copyTpl(
@@ -315,14 +307,6 @@ module.exports = class extends Generator {
     const thirdPartyLibSource = this.templatePath('template/webapp/template/thirdPartyLib');
     const thirdPartyLibDest = this.destinationPath(`${this.props.pluginName}/webapp/${this.props.pluginName}/thirdPartyLib`);
     this.fs.copy(thirdPartyLibSource, thirdPartyLibDest);
-   
-    // const componentsSource = this.destinationPath('template/webapp/template/Components');
-    // const componentsDest = this.destinationPath(`${this.props.pluginName}/webapp/${this.props.pluginName}/Components`);
-    // this.fs.copy(componentsSource, componentsDest);
-
-    // const customControlsSrc = this.destinationPath('template/webapp/template/customControls');
-    // const customControlsDest = this.destinationPath(`${this.props.pluginName}/webapp/${this.props.pluginName}/customControls`);
-    // this.fs.copy(customControlsSrc, customControlsDest);
   }
 
   install() {

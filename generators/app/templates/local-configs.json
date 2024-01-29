@@ -1,0 +1,18 @@
+{
+    "port": <%= port%>,
+    "manufacturing-execution-service": "<%= meServiceUrl %>",
+    "routes":[
+        {
+            "route":"/api/:servicePath*",
+            "uri":"<%= publicApiEndPoint %>",
+            "auth":"papiAuth"
+        }
+    ],
+    "auths":{
+        "papiAuth":{
+            "authUrl": "<%= oauthUrl %>/oauth/token",
+            "clientId": "<%= clientid %>",
+            "clientSecret": "<%= clientSecret %>"
+        }
+    }
+}
