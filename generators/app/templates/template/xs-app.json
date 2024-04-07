@@ -8,7 +8,7 @@
     {
       "source": "^/<%= name %>/(.*)$",
       "target": "$1",
-      "localDir": "webapp",
+      "localDir": "dist",
       "cacheControl": "no-cache, no-store, must-revalidate"
     }
   ]

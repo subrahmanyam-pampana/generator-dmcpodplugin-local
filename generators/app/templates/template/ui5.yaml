@@ -1,0 +1,8 @@
+specVersion: "3.2"
+metadata:
+  name: <%= name %>
+type: application
+builder:
+  resources:
+    excludes:
+      - "/lib/**"

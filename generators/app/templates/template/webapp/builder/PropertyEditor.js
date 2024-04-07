@@ -6,14 +6,14 @@ sap.ui.define([
     
     var oFormContainer;
 
-    return PropertyEditor.extend( "<%= namespace %>.<%= name %>.<%= name %>.builder.PropertyEditor" ,{
+    return PropertyEditor.extend( "<%= namespace %>.builder.PropertyEditor" ,{
 
 		constructor: function(sId, mSettings){
 			PropertyEditor.apply(this, arguments);
 			
 			this.setI18nKeyPrefix("customComponentListConfig.");
-			this.setResourceBundleName("<%= namespace %>.<%= name %>.<%= name %>.i18n.builder");
-			this.setPluginResourceBundleName("<%= namespace %>.<%= name %>.<%= name %>.i18n.i18n");
+			this.setResourceBundleName("<%= namespace %>.i18n.builder");
+			this.setPluginResourceBundleName("<%= namespace %>.i18n.i18n");
 		},
 		
 		addPropertyEditorContent: function(oPropertyFormContainer){

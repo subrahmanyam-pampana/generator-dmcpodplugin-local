@@ -1,5 +1,5 @@
 sap.ui.define([
-    "<%= namespacePath %>/<%= name %>/<%= name %>/controller/BaseController",
+    "<%= namespacePath %>/controller/BaseController",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageToast"
 ], function (BaseController,
@@ -10,7 +10,7 @@ sap.ui.define([
     let apis = {
         get_sfcDetails: "sfc/v1/sfcdetail"
     }
-    return BaseController.extend("<%= namespace %>.<%= name %>.<%= name %>.controller.MainView", {
+    return BaseController.extend("<%= namespace %>.controller.MainView", {
         onInit: function () {
             BaseController.prototype.onInit.apply(this, arguments);
             podConfigs = this._getConfiguration()

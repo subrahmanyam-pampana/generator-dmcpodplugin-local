@@ -1,6 +1,6 @@
 {
   "name": "generator-dmcpodplugin-local",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "description": "This generator scaffolds a SAP Digital Manufacturing Cloud POD Plugin",
   "homepage": "",
   "author": {

@@ -1,7 +1,7 @@
 <mvc:View 
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
-    controllerName="<%= namespace %>.<%= name %>.<%= name %>.controller.MainView"
+    controllerName="<%= namespace %>.controller.MainView"
     busyIndicatorDelay="0"
     height="100%">
     <App>

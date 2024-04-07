@@ -1,8 +1,8 @@
 sap.ui.define(
   ["sap/dm/dme/podfoundation/controller/PluginViewController",
   'sap/ui/model/json/JSONModel',
-  "<%= namespacePath %>/<%= name %>/<%= name %>/builder/localPodConfigs",
-  "<%= namespacePath %>/<%= name %>/<%= name %>/data/localPodSelectionModelData"
+  "<%= namespacePath %>/builder/localPodConfigs",
+  "<%= namespacePath %>/data/localPodSelectionModelData"
 
 ],
    function (PluginViewController,JSONModel,localPodConfigs,localPodSelectionModelData) {
@@ -10,7 +10,7 @@ sap.ui.define(
     let controller;
 
     return PluginViewController.extend(
-      "<%= namespace %>.<%= name %>.<%= name %>.controller.BaseController",
+      "<%= namespace %>.controller.BaseController",
       {
         onInit:function () {
           PluginViewController.prototype.onInit.apply(this, arguments);

@@ -5,7 +5,7 @@ sap.ui.define([
 ], function (ProductionUIComponent, Device,JSONModel) {
 	"use strict";
 
-	return ProductionUIComponent.extend("<%= namespace %>.<%= name %>.<%= name %>.Component", {
+	return ProductionUIComponent.extend("<%= namespace %>.Component", {
 		metadata: {
 			manifest: "json"
 		},
