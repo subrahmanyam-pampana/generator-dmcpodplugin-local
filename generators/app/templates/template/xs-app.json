@@ -9,7 +9,7 @@
       "source": "^/<%= name %>/(.*)$",
       "target": "$1",
       "localDir": "dist",
-      "cacheControl": "no-cache, no-store, must-revalidate"
+      "cacheControl": "public, max-age=3600, must-revalidate"
     }
   ]
 }
