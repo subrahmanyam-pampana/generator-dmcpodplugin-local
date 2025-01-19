@@ -1,11 +1,10 @@
 sap.ui.define(
   ["sap/dm/dme/podfoundation/controller/PluginViewController",
-  'sap/ui/model/json/JSONModel',
+  "<%= namespacePath %>/model/models",
   "<%= namespacePath %>/builder/localPodConfigs",
-  "<%= namespacePath %>/data/localPodSelectionModelData"
-
+  "<%= namespacePath %>/controller/LocalPodSelectionModel"
 ],
-   function (PluginViewController,JSONModel,localPodConfigs,localPodSelectionModelData) {
+   function (PluginViewController,models,localPodConfigs,LocalPodSelectionModel) {
     "use strict";
     let controller;
 
@@ -18,17 +17,17 @@ sap.ui.define(
           this.ownerComponent = this._getPodController().getOwnerComponent();
           
           this.eventBus = this.ownerComponent.getEventBus();
+
+          //create mdo model
+          this.mdoModel  = models.createMdoModel(this.getApiUrl(''));
+          this.getView().setModel(this.mdoModel,'mdo')
         
           if(!this.getPodController()){
-           
-              this.zPodSelectionModel = new JSONModel(localPodSelectionModelData);
-              this.ownerComponent.setModel(this.zPodSelectionModel, "zPodSelectionModel");
-              
-          
-          }else{
-            this.zPodSelectionModel = this.ownerComponent.getModel("zPodSelectionModel");
-           
-          }         
+              //when running in the local
+              let podSelModel = new LocalPodSelectionModel(controller);
+              this.ownerComponent.setModel(podSelModel, "podSelectionModel");
+          }  
+          this.podSelectionModel = this.ownerComponent.getModel("podSelectionModel");       
         },
 
         setCSSFile: function (filePath) {
@@ -56,24 +55,32 @@ sap.ui.define(
           if(this.getPodController()){
             return this.getPodController().getUserPlant();
           }else{
-            return this.zPodSelectionModel.getProperty("/loginData/plant");
+            return this.podSelectionModel._getPlant() 
           }
         },
         getUser:function(){
           if(this.getPodController()){
-            return this.getUserId();
+            return this.getPodController().getUserId();
           }else{
-            return this.zPodSelectionModel.getProperty('/loginData/userId')
-          }          
+            return this.podSelectionModel._getUserId() 
+          }       
+        },
+        /**
+         * returns pod selection data. 
+         * When running in local, it returns selection data maitained in localPodSelectionData file
+         * @returns {PODSelectionData}
+         */
+        getPodSelectionData:function(){
+          /**@type {PODSelectionData} */
+          let podSelData = this.podSelectionModel.getSelection();
+          return podSelData;
         },
         getWorkCenter:function(){
-          return this.zPodSelectionModel.getProperty('/loginData/workcenter')
+          return this.podSelectionModel.getWorkCenter()
         },
-        
         getResource: function () {
-          return this.zPodSelectionModel.getProperty("/loginData/resource");
+          return this.podSelectionModel.getResource().resource;
         },
-        
         get: function (api, params) {
           return new Promise((resolve, reject) => {
             if (this.getPodController()) {
@@ -185,7 +192,7 @@ sap.ui.define(
         },
         patch: function (api, data,headers={},params={}) {
           return new Promise((resolve, reject) => {
-            let paramsString = "?"+$.param(params)
+            let paramsString = (Object.keys(params).length>0)?"?"+$.param(params):"";
             if (this.getPodController()) {
               this.getPodController()._oPodController.ajaxPatchRequest(
                 controller.getApiUrl(api)+paramsString,
@@ -201,7 +208,7 @@ sap.ui.define(
               );
             } else {
               $.ajax({
-                url: controller.getApiUrl(api),
+                url: controller.getApiUrl(api)+paramsString,
                 method: "PATCH",
                 contentType: "application/json",
                 data: JSON.stringify(data),
@@ -219,7 +226,7 @@ sap.ui.define(
         },
         postoData: function (api, data,headers={},params={}) {
           return new Promise((resolve, reject) => {
-            let paramsString = "?"+$.param(params)
+            let paramsString = (Object.keys(params).length>0)?"?"+$.param(params):"";
             if (this.getPodController()) {
               this.getPodController()._oPodController.ajaxPostRequest(
                 api+paramsString,
@@ -251,7 +258,7 @@ sap.ui.define(
         },
         put: function (api, data,headers={},params={}) {
           return new Promise((resolve, reject) => {
-            let paramsString = "?"+$.param(params)
+            let paramsString = (Object.keys(params).length>0)?"?"+$.param(params):"";
             if (this.getPodController()) {
               this.getPodController()._oPodController.ajaxPutRequest(
                 controller.getApiUrl(api)+paramsString,
@@ -285,7 +292,7 @@ sap.ui.define(
         },
         putoData: function (api, data,headers={}, params={}) {
           return new Promise((resolve, reject) => {
-            let paramsString = "?"+$.param(params)
+            let paramsString = (Object.keys(params).length>0)?"?"+$.param(params):"";
             if (this.getPodController()) {
               this.getPodController()._oPodController.ajaxPutRequest(
                 api+paramsString,
@@ -315,6 +322,42 @@ sap.ui.define(
             }
           });
         },
+        delete: function (api, data,headers={},params={}) {
+          return new Promise((resolve, reject) => {
+            let paramsString = (Object.keys(params).length>0)?"?"+$.param(params):"";
+            if (this.getPodController()) {
+              this.getPodController()._oPodController.ajaxDeleteRequest(
+                controller.getApiUrl(api)+paramsString,
+                
+                function (oResponseData) {
+                  resolve(oResponseData);
+                },
+                function (oError, sHttpErrorMessage) {
+                  var err = oError || sHttpErrorMessage;
+                  console.log(err);
+                  reject(err);
+                },
+                data
+              );
+            } else {
+              $.ajax({
+                url: controller.getApiUrl(api)+paramsString,
+                method: "DELETE",
+                dataType: "json", 
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                headers:{
+                  "X-Dme-Plant": controller.getPlant(),
+                  ...headers
+                },
+                success: resolve,
+                error: (oError)=>{
+                  reject((oError && oError.responseJSON)||oError)
+                },
+              });
+            }
+          });
+        },
         getApiUrl: function (endPoint) {
           if (!this.getPublicApiRestDataSourceUri()) {
             return "/api/" + endPoint;
@@ -338,6 +381,17 @@ sap.ui.define(
          */
         getTranslatedText:function(sText,aParams=[]){
           return this.getView().getModel('i18n').getResourceBundle().getText(sText,aParams)
+        },
+        /**
+         * return pod plugin base url
+         * @returns {string} pod base url
+         */
+        getPluginBaseUri:function(){
+          let manifest  = this.getOwnerComponent().getManifest();
+          return jQuery.sap.getModulePath(manifest['sap.app'].id)+'/../';
+        },
+        getMdoUri:function(MDOName){
+          return `${this.getApiUrl()}dmci/v4/extractor/${MDOName}`
         }
       }
     );

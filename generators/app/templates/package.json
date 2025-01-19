@@ -2,16 +2,17 @@
     "name": "<%= name %>",
     "version": "0.0.1",
     "scripts": {
-        "start": "node node_modules/dmc-local-app-router/server.js",
-        "start-g":"node $(npm root -g)/dmc-local-app-router/server.js",
+        "start": "dmclar start --profile dev",
+        "start-q":"dmclar start --profile qa",
+        "start-p":"dmclar start --profile prod",
         "install":"npm i -g && cd <%= name %> && npm i",
         "login": "cf login -a <%= cfUrl %> -u <%= userMailid %>",
         "build": "mbt build -p=cf -s=./ -t=./mta_archives",
         "deploy": "cf deploy ./mta_archives/<%= name %>_0.0.1.mtar -f",
-        "bd": "cd <%= name %> && ui5 build && cd .. && mbt build -p=cf -s=./ -t=./mta_archives && cf deploy ./mta_archives/<%= name %>_0.0.1.mtar -f"
+        "bd": "mbt build -p=cf -s=./ -t=./mta_archives && cf deploy ./mta_archives/<%= name %>_0.0.1.mtar -f"
     },
     "devDependencies": {
         "@ui5/cli": "^3.9.2",
-        "dmc-local-app-router": "^1.0.2"
+        "dmc-local-app-router": "^2.0.1"
     }
 }

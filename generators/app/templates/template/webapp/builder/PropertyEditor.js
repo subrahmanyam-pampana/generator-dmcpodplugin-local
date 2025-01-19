@@ -30,12 +30,11 @@ sap.ui.define([
 		
 		getDefaultPropertyData: function(){
 			return {
-				
+
 				"backButtonVisible": true,
 				"closeButtonVisible": true,
                 "title": "<%= name %>",
 				"text": "<%= name %>"
-                
 			};
 		}
 

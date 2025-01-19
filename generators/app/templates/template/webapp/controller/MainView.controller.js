@@ -1,31 +1,38 @@
 sap.ui.define([
     "<%= namespacePath %>/controller/BaseController",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageToast"
+    "sap/m/MessageToast",
+    "<%= namespacePath %>/utils/AjaxUtil",
 ], function (BaseController,
     JSONModel,
-    MessageToast) {
+    MessageToast,AjaxUtil) {
     "use strict";
-    let podConfigs = {};
+    let podConfigs = {},that,ajax,podSelectionModel;
     let apis = {
         get_sfcDetails: "sfc/v1/sfcdetail"
     }
     return BaseController.extend("<%= namespace %>.controller.MainView", {
         onInit: function () {
             BaseController.prototype.onInit.apply(this, arguments);
-            podConfigs = this._getConfiguration()
+            that = this;
+            ajax = new AjaxUtil(this)
+            podConfigs = this._getConfiguration();
+            podSelectionModel = this.podSelectionModel;
+            console.log('podSeletionModel',podSelectionModel)
+            /*
+            sample code of accessing the pod configs 
             this.getView().byId("idBackButton").setVisible(podConfigs.backButtonVisible);
             this.getView().byId("closeButton").setVisible(podConfigs.closeButtonVisible);
             this.getView().byId("headerTitle").setText(podConfigs.title);
 
             //Example of calling public API
-            /*
+
             this.get(apis.get_sfcDetails,{
-               plant: this.getPlant(),
-               sfc:"enter sfc here"
-           }).then(res=>{
-               console.log(res)
-           })
+                plant: this.getPlant(),
+                sfc:"enter sfc here"
+            }).then(res=>{
+                console.log(res)
+            })
            */
         },
         onBeforeRenderingPlugin: function () {
@@ -70,13 +77,8 @@ sap.ui.define([
             }
 
         },
-        onBackButtonPress: function (oEvent) {
-            MessageToast.show('Back Button Pressed!')
-        },
-
         onExit: function () {
             BaseController.prototype.onExit.apply(this, arguments);
-
         }
     });
 });
