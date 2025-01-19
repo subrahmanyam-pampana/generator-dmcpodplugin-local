@@ -358,6 +358,15 @@ sap.ui.define(
             }
           });
         },
+        /**
+         * call the production process
+         * @param {string} key 
+         * @param {object} payload 
+         * @returns 
+         */
+        callpp:function(key,payload){
+          return this.post("pe/api/v1/process/processDefinitions/start",payload,{},{key:key})
+        },
         getApiUrl: function (endPoint) {
           if (!this.getPublicApiRestDataSourceUri()) {
             return "/api/" + endPoint;

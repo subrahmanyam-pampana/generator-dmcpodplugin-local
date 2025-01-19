@@ -26,7 +26,10 @@
             </headerContent>
             <content>
                 <FlexBox justifyContent="Center" alignItems="Center" width="100%" height="100%">
-                    <Title text="DMC POD Plugin is Ready!!"/>
+                    <VBox >
+                        <Title text="DMC POD Plugin is Ready!!"/>
+                        <Text text="Check README.md file in your code for further documentation"></Text>
+                    </VBox>
                 </FlexBox>
               
             </content>

@@ -30,7 +30,7 @@ module.exports = class extends Generator {
         type: "input",
         name: "version",
         message: "Version Number",
-        default: "0.0.1",
+        default: "1.0.0",
       },
 
       {
@@ -143,8 +143,11 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    const nameSpacePath = this.props.namespace.replaceAll(".", "/");
-
+    this.fs.copyTpl(
+      this.templatePath("README.md"),
+      this.destinationPath("README.md"),
+      {},
+    );
     this.fs.copyTpl(
       this.templatePath("local-configs.json"),
       this.destinationPath("local-configs.json"),
@@ -348,8 +351,8 @@ module.exports = class extends Generator {
         this.props.pluginName + "/webapp/controller/localPodSelectionData.js",
       ),
       {
-        plant:this.props.plant,
-        userMailid:this.props.userMailid
+        plant: this.props.plant,
+        userMailid: this.props.userMailid,
       },
     );
 
@@ -380,14 +383,19 @@ module.exports = class extends Generator {
       { name: this.props.pluginName },
     );
 
-
-    //Copying utils content
+    // Copying utils content
     this.fs.copyTpl(
       this.templatePath("template/webapp/utils/AjaxUtil.js"),
-      this.destinationPath(
-        this.props.pluginName + "/webapp/utils/AjaxUtil.js"
-      ),
-      {namespace: this.props.namespace },
+      this.destinationPath(this.props.pluginName + "/webapp/utils/AjaxUtil.js"),
+      {
+        namespace: this.props.namespace,
+      },
+    );
+    // Copy mdov2 edmx file
+    this.fs.copyTpl(
+      this.templatePath("template/webapp/data/mdov2.edmx"),
+      this.destinationPath(this.props.pluginName + "/webapp/data/mdov2.edmx"),
+      {},
     );
 
     // Copying third party library folder
@@ -406,5 +414,6 @@ module.exports = class extends Generator {
     this.log(
       yosay(`All finished! Ready for you to add some cool functionality`),
     );
+    this.log(yosay(`Check ./README.md file for more details`));
   }
 };

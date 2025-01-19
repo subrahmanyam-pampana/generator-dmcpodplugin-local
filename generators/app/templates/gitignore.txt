@@ -1,4 +1,4 @@
-/mta_archives/
-/node_modules/
-/resources/
-/local-configs.json
+mta_archives
+node_modules
+resources
+local-configs.json
