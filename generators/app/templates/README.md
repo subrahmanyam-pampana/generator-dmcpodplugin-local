@@ -1,9 +1,11 @@
 # DMC POD Plugin With Local Development Environment
 
 run `npm run start` to start the application in local environment
+run `npm run login` to login to cf
+run `npm run bd` to build and deploy application to cf
 
 ## Configure local-configs.json file
-Refere dmc-local-app-router [documentation](https://www.npmjs.com/package/dmc-local-app-router#200-version) to configure the local-configs.json file with profiles 
+Refer dmc-local-app-router [documentation](https://www.npmjs.com/package/dmc-local-app-router#200-version) to configure the local-configs.json file with profiles 
 
 ## Calling Public API 
 use below code to call the public api in controller.js file
