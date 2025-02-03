@@ -10,11 +10,6 @@
       "target": "$1",
       "localDir": "webapp",
       "cacheControl": "public, max-age=43200, must-revalidate"
-    },
-    {
-      "source": "^/api/(.*)$",
-      "target": "$1",
-      "destination":"SAP_DMC_DEFAULT_SERVICE_KEY"
     }
   ]
 }

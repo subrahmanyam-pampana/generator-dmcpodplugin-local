@@ -26,8 +26,11 @@ sap.ui.define(
               //when running in the local
               let podSelModel = new LocalPodSelectionModel(controller);
               this.ownerComponent.setModel(podSelModel, "podSelectionModel");
+              this.podSelectionModel = podSelModel;     
+          }else{
+              this.podSelectionModel = this.ownerComponent.getModel("podSelectionModel");     
           }  
-          this.podSelectionModel = this.ownerComponent.getModel("podSelectionModel");       
+            
         },
 
         setCSSFile: function (filePath) {

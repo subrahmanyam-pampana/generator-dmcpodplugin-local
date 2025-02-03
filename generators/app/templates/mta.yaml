@@ -52,59 +52,6 @@ modules:
                   "x-dme-plant",
                   "x-features"
                ]
-            },
-            {
-               "uriPattern": "^/api/(.*)$",
-               "allowedOrigin": [
-                  {
-                  "host": "<%= host %>",
-                  "protocol": "https"
-                  }
-               ],
-               "allowedMethods": [
-                  "GET",
-                  "OPTIONS",
-                  "POST",
-                  "PUT",
-                  "DELETE",
-                  "PATCH"
-               ],
-               "allowedHeaders": [
-                  "Origin",
-                  "Accept",
-                  "X-Requested-With",
-                  "Content-Type",
-                  "Access-Control-Request-Method",
-                  "Access-Control-Request-Headers",
-                  "Authorization",
-                  "X-Sap-Cid",
-                  "X-Csrf-Token",
-                  "x-dme-industry-type",
-                  "x-dme-plant",
-                  "x-features"
-               ],
-               "exposeHeaders": [
-                  "Accept",
-                  "Authorization",
-                  "X-Requested-With",
-                  "X-Sap-Cid",
-                  "Access-Control-Allow-Origin",
-                  "Access-Control-Allow-Credentials",
-                  "X-Csrf-Token",
-                  "Content-Type",
-                  "x-dme-industry-type",
-                  "x-dme-plant",
-                  "x-features"
-               ]
             }
             ]'
-   requires:
-    - name: destination-dm-custom-plugin
-
-resources:
- - name: destination-dm-custom-plugin
-   parameters:
-      service-plan: lite  
-      service: destination 
-   type: org.cloudfoundry.managed-service
 
