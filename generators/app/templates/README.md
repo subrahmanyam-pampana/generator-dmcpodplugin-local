@@ -1,8 +1,12 @@
 # DMC POD Plugin With Local Development Environment
 
 run `npm run start` to start the application in local environment
+
 run `npm run login` to login to cf
+
 run `npm run bd` to build and deploy application to cf
+
+run `npm run zip` to zip the content to upload pod designer
 
 ## Configure local-configs.json file
 Refer dmc-local-app-router [documentation](https://www.npmjs.com/package/dmc-local-app-router#200-version) to configure the local-configs.json file with profiles 
@@ -116,6 +120,24 @@ By default `SAP_DMC_DEFAULT_SERVICE_KEY` is add with route /api, you can use it 
         console.log(res)
     })
     .catch(err=>console.error(err))
+```
+## Calling External API's through SAP DM Approuter [official documentation](https://help.sap.com/docs/sap-digital-manufacturing/pod-plugin-developer-s-guide/calling-third-party-api)
+
+The third-party destination you configured is available at the following endpoint: /destination/<DESTINATION_NAME>/<TARGET_ENDPOINT>
+
+Example:
+
+```js
+    let url = `/destination/SAP_DMC_DEFAULT_SERVICE_KEY/dmci/v4/extractor/SFC`;
+    let params ={
+        $filter:"PLANT eq '<PLANT>'"
+    }
+
+    ajax.get(url,params)
+    .then(res=>{
+        console.log(res)
+    })
+
 ```
 
 ## Useful links

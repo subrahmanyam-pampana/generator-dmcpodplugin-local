@@ -2,3 +2,4 @@ node_modules
 coverage
 local-configs.json
 test
+.DS_Store

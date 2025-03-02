@@ -9,10 +9,11 @@
         "login": "cf login -a <%= cfUrl %> -u <%= userMailid %>",
         "build": "mbt build -p=cf -s=./ -t=./mta_archives",
         "deploy": "cf deploy ./mta_archives/<%= name %>_1.0.0.mtar -f",
-        "bd": "mbt build -p=cf -s=./ -t=./mta_archives && cf deploy ./mta_archives/<%= name %>_1.0.0.mtar -f"
+        "bd": "mbt build -p=cf -s=./ -t=./mta_archives && cf deploy ./mta_archives/<%= name %>_1.0.0.mtar -f",
+        "zip":"dmclar zip -s <%= name %>/webapp -t <%= name %>.zip"
     },
     "devDependencies": {
         "@ui5/cli": "^4.0.12",
-        "dmc-local-app-router": "^2.0.2"
+        "dmc-local-app-router": "^2.1.1"
     }
 }
